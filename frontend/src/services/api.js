@@ -1,7 +1,18 @@
 // Central API Client with JWT Header Interceptor
-// In production (Vercel), uses VITE_API_URL. In development, defaults to '/api' (proxied by Vite)
-const rawApiUrl = import.meta.env.VITE_API_URL || '/api';
-const BASE_URL = rawApiUrl.endsWith('/') ? rawApiUrl.slice(0, -1) : rawApiUrl;
+// In production (Vercel), uses VITE_API_URL or defaults to deployed Render backend API
+// In development, defaults to '/api' (proxied to localhost:5000 by Vite)
+const getBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    const url = import.meta.env.VITE_API_URL.trim();
+    return url.endsWith('/') ? url.slice(0, -1) : url;
+  }
+  if (import.meta.env.PROD) {
+    return 'https://smart-interviews-assignment.onrender.com/api';
+  }
+  return '/api';
+};
+
+const BASE_URL = getBaseUrl();
 
 export const apiRequest = async (endpoint, options = {}) => {
   const token = localStorage.getItem('token');

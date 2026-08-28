@@ -20,6 +20,8 @@ const app = express();
 const allowedOrigins = [
   'https://frontend-b2uo.vercel.app',
   'https://frontend-b2uo.vercel.app/',
+  'https://smart-interviews-assignment.onrender.com',
+  'https://smart-interviews-assignment.onrender.com/',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:3000',
