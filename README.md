@@ -1,14 +1,15 @@
 # TaskPulse — Full Stack Task Management & Analytics System
 
-A production-ready, full-stack Task Management & Tracking Web Application built with **React**, **Node.js**, **Express.js**, and **MongoDB**. Designed with high visual polish, smooth interactions, live analytics, flexible task filtering, sorting, pagination, and database query optimizations.
+A production-ready, full-stack Task Management & Tracking Web Application built with **React**, **Node.js (ES6)**, **Express.js**, and **MongoDB**. Designed with an electric **Cyber Yellow & Black** theme, glassmorphism aesthetics, live analytics, flexible task filtering, sorting, pagination, and database query optimizations.
 
 ---
 
 ## 🌐 Live Application Links
 
-- **Frontend (Vercel)**: https://frontend-b2uo.vercel.app/
-- **Backend API (Render)**: https://smart-interviews-assignment.onrender.com/
-- **Deployment Guide**: See [DEPLOYMENT.md](file:///c:/Users/anil3/OneDrive/Documents/smart-interviews-assignment/DEPLOYMENT.md) for step-by-step setup instructions.
+- **Frontend (Vercel)**: [https://frontend-b2uo.vercel.app/](https://frontend-b2uo.vercel.app/)
+- **Backend API (Render)**: [https://smart-interviews-assignment.onrender.com/](https://smart-interviews-assignment.onrender.com/)
+- **API Health Check**: [https://smart-interviews-assignment.onrender.com/api/health](https://smart-interviews-assignment.onrender.com/api/health)
+- **Deployment Guide**: See [DEPLOYMENT.md](file:///c:/Users/anil3/OneDrive/Documents/smart-interviews-assignment/DEPLOYMENT.md) for full setup instructions.
 
 ---
 
@@ -18,13 +19,13 @@ A production-ready, full-stack Task Management & Tracking Web Application built 
 - **JWT-Based Authentication**: Secure stateless authentication using JSON Web Tokens.
 - **Password Encryption**: Sensitive passwords hashed with `bcryptjs` (salt rounds: 10).
 - **Validation**: Strict email regex checks, minimum password lengths, and required field validations.
-- **1-Click Demo Login**: Instantly test the platform with seeded sample tasks without manual registration.
+- **1-Click Demo Login**: Instantly explore the application with seeded sample tasks without manual registration.
 
 ### 2. 📋 Comprehensive Task Management
 - **Full CRUD Operations**: Create, View, Update, Delete tasks with instant UI feedback.
 - **Standardized Task Fields**:
   - `Title`: Task title (with character constraints)
-  - `Description`: Markdown/Text details
+  - `Description`: Details / Markdown notes
   - `Status`: `Todo` | `In Progress` | `Done`
   - `Priority`: `Low` | `Medium` | `High`
   - `Due Date`: Deadline picker with quick shortcuts (*Today*, *Tomorrow*, *+3 Days*, *+1 Week*)
@@ -52,6 +53,7 @@ A production-ready, full-stack Task Management & Tracking Web Application built 
   - **Timeline Indicators**: *Overdue Tasks*, *Due Today*, and *Upcoming in 7 Days*
 
 ### 5. 🎨 UI/UX & Product Enhancements
+- **Cyber Yellow & Black Theme**: High-contrast, futuristic dark mode aesthetic with vibrant amber/yellow accents.
 - **Dual View Modes**:
   - 📋 **List View**: Dense table-like layout with status checkboxes and pagination.
   - 📌 **Kanban Board**: Interactive 3-column drag/move board (`To Do`, `In Progress`, `Completed`).
@@ -61,13 +63,15 @@ A production-ready, full-stack Task Management & Tracking Web Application built 
 - **Mobile Responsive**: Adaptive layout with drawer navigation for smartphones and tablets.
 
 ### 6. ⚡ Backend Architecture & MongoDB Optimization
-- **MongoDB Indexing**: Compound indexes to ensure $O(1)$ to $O(\log N)$ query speed:
+- **ES6 Modules**: Full codebase written in modern ES6 (`import` / `export`).
+- **MongoDB Compound Indexing**: Compound indexes to ensure $O(1)$ to $O(\log N)$ query speed:
   - `{ user: 1, status: 1 }`
   - `{ user: 1, priority: 1 }`
   - `{ user: 1, dueDate: 1 }`
   - `{ user: 1, createdAt: -1 }`
   - Text search index on `{ title: 'text', description: 'text' }`
 - **Global Error Handling**: Centralized middleware handling Mongoose validation errors, duplicate keys (11000), cast errors, and JWT expiration.
+- **Dual Path Routing**: API routes mapped to both `/api/*` and `/*` for seamless client compatibility.
 - **In-Memory MongoDB Fallback**: Allows immediate local evaluation even if local MongoDB server is not running.
 
 ---
@@ -77,8 +81,9 @@ A production-ready, full-stack Task Management & Tracking Web Application built 
 | Layer | Technology |
 | :--- | :--- |
 | **Frontend** | React 18, Vite, Vanilla CSS (Design Tokens & Glassmorphism), Lucide Icons |
-| **Backend** | Node.js, Express.js, JSON Web Tokens (JWT), bcryptjs, Morgan |
-| **Database** | MongoDB, Mongoose ODM |
+| **Backend** | Node.js (ES6 Modules), Express.js, JSON Web Tokens (JWT), bcryptjs, Morgan, CORS |
+| **Database** | MongoDB Atlas, Mongoose ODM |
+| **Hosting** | Vercel (Frontend), Render (Backend Web Service) |
 
 ---
 
@@ -102,13 +107,14 @@ smart-interviews-assignment/
 │   │   │   ├── User.js                # User schema & bcrypt hooks
 │   │   │   └── Task.js                # Task schema & compound indexes
 │   │   ├── routes/
-│   │   │   ├── authRoutes.js          # /api/auth
-│   │   │   ├── taskRoutes.js          # /api/tasks
-│   │   │   └── analyticsRoutes.js     # /api/analytics
+│   │   │   ├── authRoutes.js          # /api/auth and /auth
+│   │   │   ├── taskRoutes.js          # /api/tasks and /tasks
+│   │   │   └── analyticsRoutes.js     # /api/analytics and /analytics
 │   │   ├── utils/
 │   │   │   └── generateToken.js       # JWT helper
-│   │   └── server.js                  # Server entry point
+│   │   └── server.js                  # Express main server entry point
 │   ├── .env.example
+│   ├── test_api.js                    # Automated API test suite
 │   └── package.json
 │
 ├── frontend/
@@ -131,33 +137,33 @@ smart-interviews-assignment/
 │   │   │   ├── taskService.js
 │   │   │   └── analyticsService.js
 │   │   ├── styles/
-│   │   │   └── index.css              # Design tokens, variables & dark mode
+│   │   │   └── index.css              # Yellow & Black theme tokens & variables
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html
 │   ├── vite.config.js
+│   ├── vercel.json                    # Vercel SPA routing rewrite
 │   └── package.json
 │
-├── README.md
-└── package.json
+├── DEPLOYMENT.md                      # Complete Render & Vercel deployment guide
+├── README.md                          # Main project documentation
+└── package.json                       # Root script orchestrator
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Local Development Setup
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [Node.js](https://nodejs.org/) (v18+ recommended)
 - [npm](https://www.npmjs.com/)
-- *Optional*: Local MongoDB or MongoDB Atlas URI (if not provided, an in-memory database will launch automatically for dev testing).
+- *Optional*: Local MongoDB or MongoDB Atlas URI (if omitted, an in-memory database will launch automatically for dev testing).
 
 ### 1. Clone & Install Dependencies
 
-Clone repository and install dependencies in both folders:
-
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/anilKumar-9/smart-interviews-assignment.git
 cd smart-interviews-assignment
 
 # Install backend dependencies
@@ -171,17 +177,18 @@ npm install
 
 ### 2. Environment Variables Setup
 
-Create a `.env` file in the `backend/` directory (or use default `.env.example`):
+Create a `.env` file in the `backend/` directory:
 
 ```env
 PORT=5000
 NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/task_tracker
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxx.mongodb.net/task_tracker?retryWrites=true&w=majority
 JWT_SECRET=super_secret_jwt_key_task_tracker_2026_smart_interviews
 JWT_EXPIRE=30d
+CLIENT_URL=https://frontend-b2uo.vercel.app
 ```
 
-### 3. Running the Application
+### 3. Running the Application Locally
 
 **Terminal 1 — Start Backend Server**:
 ```bash
@@ -210,10 +217,10 @@ All protected endpoints require the header:
 
 | Method | Endpoint | Description | Body Params |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/signup` | Register a new user | `{ name, email, password }` |
-| `POST` | `/api/auth/login` | Authenticate user & receive token | `{ email, password }` |
-| `POST` | `/api/auth/demo` | 1-Click Demo Login with seeded sample tasks | *None* |
-| `GET` | `/api/auth/me` | Fetch authenticated user profile | *Headers only* |
+| `POST` | `/api/auth/signup` *(or `/auth/signup`)* | Register a new user | `{ name, email, password }` |
+| `POST` | `/api/auth/login` *(or `/auth/login`)* | Authenticate user & receive token | `{ email, password }` |
+| `POST` | `/api/auth/demo` *(or `/auth/demo`)* | 1-Click Demo Login with seeded sample tasks | *None* |
+| `GET` | `/api/auth/me` *(or `/auth/me`)* | Fetch authenticated user profile | *Headers only* |
 
 ### 2. Task Management Endpoints
 
@@ -264,7 +271,7 @@ GET /api/tasks?status=In%20Progress&priority=High&search=architecture&sort=dueDa
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/analytics` | Returns aggregated metrics, completion %, and status/priority breakdown |
+| `GET` | `/api/analytics` *(or `/analytics`)* | Returns aggregated metrics, completion %, and status/priority breakdown |
 
 #### Example Analytics Response:
 ```json
