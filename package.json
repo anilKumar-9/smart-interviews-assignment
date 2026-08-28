@@ -1,0 +1,13 @@
+{
+  "name": "task-management-system",
+  "version": "1.0.0",
+  "description": "Full Stack Task Management System with React, Express, and MongoDB",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["mern", "task-management", "react", "express", "mongodb"],
+  "author": "",
+  "license": "ISC"
+}
