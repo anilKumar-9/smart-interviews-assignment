@@ -74,10 +74,15 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Routes
+// API Routes (Supports both /api/* and /* paths)
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/tasks', taskRoutes);
+app.use('/tasks', taskRoutes);
+
 app.use('/api/analytics', analyticsRoutes);
+app.use('/analytics', analyticsRoutes);
 
 // Error Handlers
 app.use(notFound);

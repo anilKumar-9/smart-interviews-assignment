@@ -1,10 +1,12 @@
 // Central API Client with JWT Header Interceptor
-// In production (Vercel), uses VITE_API_URL or defaults to deployed Render backend API
+// In production (Vercel), automatically ensures /api prefix
 // In development, defaults to '/api' (proxied to localhost:5000 by Vite)
 const getBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
-    const url = import.meta.env.VITE_API_URL.trim();
-    return url.endsWith('/') ? url.slice(0, -1) : url;
+  let url = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.trim() : '';
+  if (url) {
+    if (url.endsWith('/')) url = url.slice(0, -1);
+    if (!url.endsWith('/api')) url = `${url}/api`;
+    return url;
   }
   if (import.meta.env.PROD) {
     return 'https://smart-interviews-assignment.onrender.com/api';
