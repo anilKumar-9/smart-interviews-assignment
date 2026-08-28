@@ -1,4 +1,4 @@
-const Task = require('../models/Task');
+import Task from '../models/Task.js';
 
 // @desc    Get all tasks for authenticated user (with filter, search, sort, pagination)
 // @route   GET /api/tasks
@@ -34,7 +34,6 @@ const getTasks = async (req, res, next) => {
     } else if (sort === 'dueDate_desc') {
       sortOptions = { dueDate: -1, createdAt: -1 };
     } else if (sort === 'priority_high') {
-      // Custom sorting handled or index sort
       sortOptions = { priority: 1, createdAt: -1 };
     } else if (sort === 'createdAt_asc') {
       sortOptions = { createdAt: 1 };
@@ -239,7 +238,7 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   getTasks,
   getTaskById,
   createTask,

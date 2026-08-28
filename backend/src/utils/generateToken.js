@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET || 'super_secret_jwt_key_task_tracker_2026', {
@@ -6,4 +6,4 @@ const generateToken = (userId) => {
   });
 };
 
-module.exports = generateToken;
+export default generateToken;

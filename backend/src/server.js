@@ -1,9 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -13,8 +16,39 @@ connectDB();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// CORS Configuration
+const allowedOrigins = [
+  'https://frontend-b2uo.vercel.app',
+  'https://frontend-b2uo.vercel.app/',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:3000',
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. mobile apps, curl, health checks)
+      if (!origin) return callback(null, true);
+
+      const normalizedOrigin = origin.endsWith('/') ? origin.slice(0, -1) : origin;
+      const isAllowed = allowedOrigins.some((allowed) => {
+        const normalizedAllowed = allowed.endsWith('/') ? allowed.slice(0, -1) : allowed;
+        return normalizedAllowed === normalizedOrigin;
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(null, true);
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 app.use(express.json());
 
 if (process.env.NODE_ENV !== 'production') {
@@ -39,9 +73,9 @@ app.get('/api/health', (req, res) => {
 });
 
 // API Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/tasks', require('./routes/taskRoutes'));
-app.use('/api/analytics', require('./routes/analyticsRoutes'));
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Error Handlers
 app.use(notFound);
@@ -53,4 +87,4 @@ const server = app.listen(PORT, () => {
   console.log(`🚀 Task Management Server running on port ${PORT}`);
 });
 
-module.exports = { app, server };
+export { app, server };

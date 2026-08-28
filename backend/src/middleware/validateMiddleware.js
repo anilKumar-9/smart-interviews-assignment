@@ -88,7 +88,7 @@ const validateTask = (req, res, next) => {
   next();
 };
 
-module.exports = {
+export {
   validateSignup,
   validateLogin,
   validateTask,

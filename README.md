@@ -6,8 +6,8 @@ A production-ready, full-stack Task Management & Tracking Web Application built 
 
 ## 🌐 Live Application Links
 
-- **Frontend (Vercel)**: `https://your-taskpulse.vercel.app` *(Replace with your deployed URL)*
-- **Backend API (Render)**: `https://your-task-tracker-backend.onrender.com` *(Replace with your deployed URL)*
+- **Frontend (Vercel)**: https://frontend-b2uo.vercel.app/
+- **Backend API (Render)**: https://smart-interviews-assignment.onrender.com/
 - **Deployment Guide**: See [DEPLOYMENT.md](file:///c:/Users/anil3/OneDrive/Documents/smart-interviews-assignment/DEPLOYMENT.md) for step-by-step setup instructions.
 
 ---

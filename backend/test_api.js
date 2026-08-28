@@ -1,10 +1,8 @@
-const http = require('http');
+import http from 'http';
+import { app, server } from './src/server.js';
 
 const runTests = async () => {
-  console.log('🧪 Starting API Verification Tests...');
-
-  // Start server directly
-  const { app, server } = require('./src/server');
+  console.log('🧪 Starting ES6 API Verification Tests...');
 
   // Helper for requests
   const request = (path, method = 'GET', body = null, token = null) => {
@@ -75,8 +73,8 @@ const runTests = async () => {
       '/api/tasks',
       'POST',
       {
-        title: 'Automated Test Task 2026',
-        description: 'Verifying end-to-end task pipeline',
+        title: 'ES6 Module Verification Task',
+        description: 'Verifying end-to-end task pipeline with ES6 imports',
         status: 'Todo',
         priority: 'High',
         dueDate: new Date().toISOString(),
@@ -99,7 +97,7 @@ const runTests = async () => {
     // 6. Test Search and Filter
     console.log('\n6️⃣ Testing Task Filtering & Search...');
     const filtered = await request(
-      '/api/tasks?search=Automated&status=Done&priority=High',
+      '/api/tasks?search=Module&status=Done&priority=High',
       'GET',
       null,
       token
@@ -116,7 +114,7 @@ const runTests = async () => {
     const deleted = await request(`/api/tasks/${taskId}`, 'DELETE', null, token);
     console.log('Delete Response:', deleted.status, deleted.body);
 
-    console.log('\n🎉 ALL BACKEND API TESTS PASSED SUCCESSFULLY!');
+    console.log('\n🎉 ALL ES6 BACKEND API TESTS PASSED SUCCESSFULLY!');
   } catch (err) {
     console.error('❌ Test failed:', err);
   } finally {

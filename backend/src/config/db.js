@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
@@ -14,7 +14,7 @@ const connectDB = async () => {
     if (process.env.NODE_ENV !== 'production') {
       try {
         console.log('🔄 Initializing in-memory MongoDB fallback for smooth local evaluation...');
-        const { MongoMemoryServer } = require('mongodb-memory-server');
+        const { MongoMemoryServer } = await import('mongodb-memory-server');
         const mongod = await MongoMemoryServer.create();
         const memoryUri = mongod.getUri();
         const conn = await mongoose.connect(memoryUri);
@@ -30,4 +30,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+export default connectDB;

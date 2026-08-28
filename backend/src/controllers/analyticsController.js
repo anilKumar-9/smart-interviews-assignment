@@ -1,4 +1,4 @@
-const Task = require('../models/Task');
+import Task from '../models/Task.js';
 
 // @desc    Get comprehensive task analytics & insights
 // @route   GET /api/analytics
@@ -80,6 +80,6 @@ const getTaskAnalytics = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   getTaskAnalytics,
 };
